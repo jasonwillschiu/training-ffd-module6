@@ -27,7 +27,8 @@ router.get('/', function(req, res, next) {
 
     const req_config = { 
       headers: {
-        'Accept': 'application/json' 
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${access_token}`
       }
     }
     

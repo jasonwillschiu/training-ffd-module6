@@ -11,8 +11,8 @@ router.get('/', function(req, res, next) {
   // *********************************************************
   // TODO: 5. extract code and state parameters from query parameters
   
-  const code = null;
-  const state = null;
+  const code = query.code;
+  const state = query.state;
   
   // *********************************************************
 
@@ -44,7 +44,12 @@ router.get('/', function(req, res, next) {
     // ************************************
     // TODO 6. Populate the Token request body
     
-    const token_request = {}; 
+    const token_request = {
+      grant_type: 'authorization_code',
+      client_id: client_id,
+      redirect_uri: redirect_url,
+      code: code
+    }; 
     
     // ************************************
 
@@ -60,10 +65,10 @@ router.get('/', function(req, res, next) {
       // TODO 7. Extract access token and launch context from token data
       //         and save in session for later
 
-      req.session.access_token = null;
-      req.session.id_token = null;
-      req.session.scopes = null;
-      req.session.patient = null;
+      req.session.access_token = token_data.access_token;
+      req.session.id_token = token_data.id_token;
+      req.session.scopes = token_data.scope;
+      req.session.patient = token_data.patient;
       
       // ********************************************************
       console.log("--- Access Token Response ---");
